@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>[Arxiv 2025]DiffV2IR: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding</title>
+    <title>DiffV2IR: Visible-to-Infrared Diffusion Model via Vision-Language Understanding</title>
 
     <meta name="description" content="Project page for DiffV2IR: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,7 +65,7 @@
     <div class="container" id="main" style="width: 100%; max-width: 1500px;">
         <div class="row">
             <h1 class="col-md-12 text-center">
-                <b>DiffV2IR</b>: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding <br>
+                <b>[Arxiv 2025]DiffV2IR</b>: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding <br>
                 <small>
                     <!-- TOG 2022 (Proc. SIGGRAPH Asia) -->
                 </small>
@@ -137,13 +137,15 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Abstract
-                </h3>
-                <br>
+                <p class="text-justify">
+                    <strong>TL;DR:</strong> We present DiffV2IR, a novel framework for visible-to-infrared image translation comprising two key elements: a Progressive Learning Module (PLM) and a Vision-Language Understanding Module (VLUM), which markedly improves the performance of V2IR. 
+                </p>
                 <video id="v0" width="100%" autoplay loop muted controls>
                     <source src="img/task.mp4" type="video/mp4"/>
                 </video>
+                <h3>
+                    Abstract
+                </h3>
                 <p class="text-justify">
                     The task of translating visible-to-infrared images (V2IR) is inherently challenging due to three main obstacles: 1) achieving semantic-aware translation, 2) managing the diverse wavelength spectrum in infrared imagery, and 3) the scarcity of comprehensive infrared datasets. Current leading methods tend to treat V2IR as a conventional image-to-image synthesis challenge, often overlooking these specific issues. To address this, we introduce DiffV2IR, a novel framework for image translation comprising two key elements: a Progressive Learning Module (PLM) and a Vision-Language Understanding Module (VLUM). PLM features an adaptive diffusion model architecture that leverages multi-stage knowledge learning to infrared transition from full-range to target wavelength. To improve V2IR translation, VLUM incorporates unified Vision-Language Understanding. We also collected a large infrared dataset, IR-500K, which includes 500,000 infrared images compiled by various scenes and objects under various environmental conditions. Through the combination of PLM, VLUM, and the extensive IR-500K dataset, DiffV2IR markedly improves the performance of V2IR. Experiments validate DiffV2IR's excellence in producing high-quality translations, establishing its efficacy and broad applicability. The code, dataset, and DiffV2IR model will be available.
                 </p>
