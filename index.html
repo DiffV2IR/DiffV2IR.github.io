@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>[Arxiv 2025]DiffV2IR: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding</title>
+
+    <meta name="description" content="Project page for DiffV2IR: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="../../stylesheet.css">
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <script type="text/javascript">
+        function toggle_visibility(id) {
+           var e = document.getElementById(id);
+           if(e.style.display == 'block')
+              e.style.display = 'none';
+           else
+              e.style.display = 'block';
+        }
+        </script>
+</head>
+
+<body>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./js/three.module.js"
+            }
+        }
+    </script>
+    <script type="module" src='js/renderer.js'></script>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <!-- <span class="close">&times;</span> -->
+            <div class="row" style="align-content: center; width: 100%;">
+                <div class="col-lg-8" style='padding-right:5px; padding-left:0px; '>
+                    <div id="pano-container" style='text-align: center; height: 100%;'>
+                        <img id="pano-img" src="" style="display: none;">
+                    </div>
+                </div>
+                <div class="col-lg-4" style='padding-left:5px; padding-right:0px; height: 100%;'>
+                    <div id="threejs-dynamic-container" style='text-align: center; height: 100%;'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="main" style="width: 100%; max-width: 1500px;">
+        <div class="row">
+            <h1 class="col-md-12 text-center">
+                <b>DiffV2IR</b>: Visible-to-Infrared Diffusion Model via  Vision-Language Understanding <br>
+                <small>
+                    <!-- TOG 2022 (Proc. SIGGRAPH Asia) -->
+                </small>
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://hijeffery.github.io/">
+                            Lingyan Ran<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            Lidong Wang<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wanggcong.github.io/">
+                            Guangcong Wang<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            Peng Wang<sup>1</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            Yanning Zhang<sup>1</sup>
+                        </a>
+                    </li>
+                    </br>Northwestern Polytechnical University<sup>1</sup>
+                    </br>Great Bay University<sup>2</sup>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href=>
+                            <image src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/5cab99df4998decfbf9e218e_paper-01-p-500.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://youtu.be/YbUuvjnfejE">
+                            <image src="img/youtube_icon.png" height="60px">
+                                <h4><strong>Video</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/897402622/DiffV2IR">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <br>
+                <video id="v0" width="100%" autoplay loop muted controls>
+                    <source src="img/task.mp4" type="video/mp4"/>
+                </video>
+                <p class="text-justify">
+                    The task of translating visible-to-infrared images (V2IR) is inherently challenging due to three main obstacles: 1) achieving semantic-aware translation, 2) managing the diverse wavelength spectrum in infrared imagery, and 3) the scarcity of comprehensive infrared datasets. Current leading methods tend to treat V2IR as a conventional image-to-image synthesis challenge, often overlooking these specific issues. To address this, we introduce DiffV2IR, a novel framework for image translation comprising two key elements: a Progressive Learning Module (PLM) and a Vision-Language Understanding Module (VLUM). PLM features an adaptive diffusion model architecture that leverages multi-stage knowledge learning to infrared transition from full-range to target wavelength. To improve V2IR translation, VLUM incorporates unified Vision-Language Understanding. We also collected a large infrared dataset, IR-500K, which includes 500,000 infrared images compiled by various scenes and objects under various environmental conditions. Through the combination of PLM, VLUM, and the extensive IR-500K dataset, DiffV2IR markedly improves the performance of V2IR. Experiments validate DiffV2IR's excellence in producing high-quality translations, establishing its efficacy and broad applicability. The code, dataset, and DiffV2IR model will be available.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Framework
+                </h3>
+                <p style="text-align:center;">
+                    <image src="img/main.png" class="img-responsive" alt="scales">
+                </p>
+                <p class="text-justify">
+                    DiffV2IR mainly consists of two components, i.e., Progressive Learning Module (PLM) and Vision-Language Understanding Module (VLUM). Specifically, 1) as for PLM, we first establish foundational knowledge of infrared imaging properties utilizing our collected IR-500K dataset. Then we use visible-infrared image pairs to learn cross-modal transformation and finally conduct the refinement on the specific infrared imaging style. 2) as for VLUM, we incorporate unified vision-language understanding, including detailed language descriptions and segmentation maps, to make DiffV2IR semantic-aware and structure-preserving. 
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Demo Video
+                </h3>
+                <div class="text-center">
+                    <div style="position:relative;padding-top:56.25%;">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/YbUuvjnfejE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10" style="padding: 0%; margin: 0%;">
+                    <textarea id="bibtex" class="form-control" readonly>
+</textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                The website template is borrowed from <a href="https://sparsenerf.github.io/">SparseNeRF</a>.
+                </p>
+                <br>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
